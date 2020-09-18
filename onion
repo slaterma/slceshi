@@ -1,0 +1,9 @@
+echo "# slceshi" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/slaterma/slceshi.git
+git push -u origin master
+    AccessKey：69f6d4dd-efff-4528-8c3f-dbfcd11cba4c. 
+                
