@@ -1,9 +1,84 @@
-echo "# slceshi" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M master
-git remote add origin https://github.com/slaterma/slceshi.git
-git push -u origin master
-    AccessKey：69f6d4dd-efff-4528-8c3f-dbfcd11cba4c. 
+# coding=utf-8
+import requests
+import sys
+reload(sys)
+sys.setdefaultencoding("utf8")
+
+
+class spider():
+  def __init__(self):
+          print "开始爬取内容。。。"
+
+       def changePage(self, url, total_page):
+          nowpage = int(re.search('/0-(\d+)/', url, re.S).group(1))
+          pagegroup = []
+
+          for i in range(nowpage, total_page + 1):
+              link = re.sub('/0-(\d+)/', '/0-%s/' % i, url, re.S)
+              pagegroup.append(link)
+
+          return pagegroup
+
+def getsource(self, url):
+    html = requests.get(url)
+    return html.text
+
+def getclasses(self, source):
+    classes = re.search('
+(.*?)
+', source, re.S).group(1)
+    return classes
+
+def geteach(self, classes):
+    eachclasses = re.findall('
+(.*?)
+', classes, re.S)
+    return eachclasses
+
+def getinfo(self, eachclass):】
+    info = {}
+    info['title'] = re.search(', eachclass, re.S).group(1)
+    info['people'] = re.search('
+(.*?)
+
+', eachclass, re.S).group(1)
+    return info
+
+def saveinfo(self, classinfo):
+    f = open('info.txt', 'a')
+
+    for each in classinfo:
+        f.writelines('title : ' + each['title'] + '\n')
+        f.writelines('people : ' + each['people'] + '\n\n')
+
+    f.close()
+define('OSS_Access_ID','69f6d4dd-efff-4528-8c3f-dbfcd11cba4c')    
+define('OSS_Access_Key','-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt8X8xvUbT5H3h7DGYZTq
+9+2MGVLidvBZQzrW1JSm+HImsTh+H7kvmdVKp+wFrNjMU319LnvZp0uC09nl+OfD
+H3x4vlFjQ5A6pE8qpfRFk+zUPyjsof/F3zCkGHmfpgW6fCL+2xD8RWelqh8GFmD5
+QAvhcWiSOXaHAw2rmBNqBfhVIfd6lu8WuE+SqRICWbLHJHZ93SSfAQ8qzT++ij1T
+GbQCEf+2O3/G5Ko4k7COirnU71iny6XXC7n93HfoA8Z9vNblYt6dWDfBd7sA9Lop
+R5K4MvJu4+pGZ5NUXqsvYlKk11TR8IdDL6P+x5jiNCNwbx9T7ldVel9+1CDuNZhM
+dQIDAQAB
+-----END PUBLIC KEY-----
+') 
+
+if __name__ == '__main__':
+
+      classinfo = []
+      url = 'http://www.maiziedu.com/course/list/all-all/0-1/'
+      maizispider = spider()
+      all_links = maizispider.changePage(url, 30)
+      for each in all_links:
+         htmlsources = maizispider.getsource(each)
+          classes = maizispider.getclasses(htmlsources)
+          eachclasses = maizispider.geteach(classes)
+
+          for each in eachclasses:
+              info = maizispider.getinfo(each)
+              classinfo.append(info)
+
+      maizispider.saveinfo(classinfo)
+    
                 
